@@ -35,7 +35,7 @@ int parse_c(std::string outfile, std::string filename) {
         // read stuff from the file into a string and print it
         std::string strInput;
         std::getline(inf, strInput);
-        std::cout << strInput << " input string" << '\n';
+        //std::cout << strInput << " input string" << '\n'; Test for proper input string read from file.
         std::string delimiter = ";";
         std::string outString = "";
         unsigned int pos = 0;
@@ -44,7 +44,7 @@ int parse_c(std::string outfile, std::string filename) {
         while ((pos = strInput.find(delimiter)) != std::string::npos) {
             std::string value = "";
             token = strInput.substr(0, pos);
-            std::cout << token << " token" <<  std::endl;
+            //std::cout << token << " token" <<  std::endl; Test for properly parsed token
             
             if (token_count == 0) {
                 if (token == "s") {
@@ -107,7 +107,7 @@ int parse_c(std::string outfile, std::string filename) {
             token_count++;
             strInput.erase(0, pos + delimiter.length());
         }
-        std::cout << outString << " output string" << std::endl;
+        //std::cout << outString << " output string" << std::endl; Test for proper parsed output
         outf << outString << '\n';
         
     }
