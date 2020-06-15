@@ -1,0 +1,40 @@
+//Copyright 2020 BullDog481, MIT License
+Parsing Files to C++
+
+
+Primitive Types
+s;[name];[value]; = string
+i;[size];[name];[value]; = integer type of size n number of bytes
+c;[name];[value]; = char (ASCII TEXT)
+d;[name];[value]; = double
+f;[name];[value]; = float
+b;[size];[name];[value]; = byte array of size n number of bytes (implemented as char[] in C/C++) (ASCII TEXT)
+
+Data Representation
+/Class = declare start of class "Class"
+/ = end of class "Class"
+r = repeated values of a primitive type (implemented as vector<type> in C/C++)
+.outfile = output a class to its own separate file of name "outfile" (used within class definition)
+dd = default value of a primitive type
+eEnum_name
+e = end of enum "Enum_name"
+c;'c';
+c;'a';
+c;'b'; = an enum, name "Enum" of defined primitive type values, several lines delimited by ";"
+
+Examples
+rs BullDog dd BullDog = Repeated string values with default value "BullDog"
+i4;450; = 32-bit (4 byte) integer with value 450
+ri4;450;520;dd;314;500; = repeated 4 byte integer values with 450 and 520 in the vector, default value 314 500
+b4;c;a;b; = byte array of four bytes containing chars c, a and b
+ri4;450;500;550;200;300;
+300;240;2948;39;109;9;39; = multiline repeated 4 byte integer values delimited by ';'
+/MyCar = declare class of name "MyCar"
+i4;450; - 2 lines of class fields
+s;BullDog;
+.MyCar.cpp = Put MyCar Class in its own file, MyCar.cpp
+/  = end of class "MyCar"
+eMyEnum = declare of enum of name "MyEnum"
+i4;50;20;
+i4;50;40;
+e = end of enum "MyEnum"
