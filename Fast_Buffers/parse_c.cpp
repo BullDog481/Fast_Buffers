@@ -35,21 +35,26 @@ int parse_c(std::string outfile, std::string filename) {
         // read stuff from the file into a string and print it
         std::string strInput;
         std::getline(inf, strInput);
-        //std::cout << strInput << " input string" << '\n'; Test for proper input string read from file.
+        //std::cout << strInput << " input string" << '\n'; //Test for proper input string read from file.
         std::string delimiter = ";";
         std::string outString = "";
         unsigned int pos = 0;
         std::string token;
         unsigned int token_count = 0;
+        std::string first_token = "";
         while ((pos = strInput.find(delimiter)) != std::string::npos) {
             std::string value = "";
             token = strInput.substr(0, pos);
-            //std::cout << token << " token" <<  std::endl; Test for properly parsed token
-            
+            //std::cout << token << " token" << std::endl; //Test for properly parsed token
+
             if (token_count == 0) {
                 if (token == "s") {
                     value = "std::string ";
-
+                    first_token.append("s");
+                }
+                else if (token == "c") {
+                    value = "char ";
+                    first_token.append("c");
                 }
                 else if (token[0] == 'i') {
                     if (token[1] == '2') {
@@ -64,10 +69,7 @@ int parse_c(std::string outfile, std::string filename) {
 
 
                 }
-                else if (token == "c") {
-                    value = "char ";
 
-                }
                 else if (token == "d") {
                     value = "double ";
 
@@ -98,16 +100,29 @@ int parse_c(std::string outfile, std::string filename) {
                 token.append(" = ");
                 value = token;
             }
+           else if (token_count == 2 && first_token == "s") {
+                token.insert(0, "\"");
+                token.append("\";");
+                value = token;
+            }
+            else if (token_count == 2 && first_token == "c") {
+                token.insert(0, "'");
+                token.append("';");
+                value = token;
+            }
             else if (token_count == 2) {
                 token.append(";");
                 value = token;
             }
+        
+                
+            
             outString.append(value);
             
             token_count++;
             strInput.erase(0, pos + delimiter.length());
         }
-        //std::cout << outString << " output string" << std::endl; Test for proper parsed output
+        //std::cout << outString << " output string" << std::endl; //Test for proper parsed output
         outf << outString << '\n';
         
     }
